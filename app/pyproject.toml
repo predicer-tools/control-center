@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools >= 64", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "controlcenter"
+version = "0.1.0"
+authors = [{name = "Pekka Savolainen", email = "pekka.t.savolainen@vtt.fi"}]
+license = {text = "LGPL-3.0-or-later"}
+description = "An application to manage connectivity between Hertta, Predicer, InfluxDb, and Center Denmark's Data Portal"
+readme = {file = "README.md", content-type = "text/markdown"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.11, <3.15"
+dependencies = [
+    "PySide6 >= 6.7.0, != 6.8.0, != 6.8.0.1, <6.10",
+    "requests >= 2.32",
+    "requests-toolbelt >=1.0",
+    "influxdb_client >= 1.47",
+    "gql >= 3.5",
+]

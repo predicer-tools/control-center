@@ -1,0 +1,9 @@
+.idea
+.spyderproject
+.venv*/
+*.pyc
+__pycache__/
+*.egg-info
+build/
+dist/
+app/controlcenter/tokens.toml
