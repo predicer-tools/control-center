@@ -9,7 +9,10 @@ class HerttaServerManager:
     def __init__(self, log_signal, finished_signal):
         self._process = None
         self._command = ["cargo", "run"]
-        self._workdir = os.path.join("C:\\", "data", "GIT", "Hertta")
+        here = os.path.abspath(__file__)
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(here)))
+        # Path to the Hertta submodule: control-center/hertta
+        self._workdir = os.path.join(project_root, "hertta")
         self._stopped = False
         self.log_signal = log_signal
         self.finished_signal = finished_signal
