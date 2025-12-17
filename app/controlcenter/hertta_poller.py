@@ -1,7 +1,7 @@
 """Thread for polling the Hertta Server status."""
 
 import threading
-import hertta_client_lib as lib
+from . import hertta_client_lib as lib
 from time import sleep
 
 

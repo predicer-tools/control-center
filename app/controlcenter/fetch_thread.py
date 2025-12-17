@@ -5,12 +5,12 @@ import time
 from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 from urllib3.exceptions import NewConnectionError
-from config import (
+from .config import (
     URLS, BUCKETS, MEASUREMENTS,
     TAGS, FIELDS, TIME, PRECISION, FIELD_TYPES, LIMIT_AND_PAGES, PROCESSING_TIME,
     ORG, INFLUXDB_URL
 )
-from connectivity_api import post_request, post_request_hertta
+from .connectivity_api import post_request, post_request_hertta
 
 
 class FetchThread(threading.Thread):

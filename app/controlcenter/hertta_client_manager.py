@@ -1,7 +1,7 @@
 from typing import Optional
 from gql import dsl
 from gql.dsl import DSLField
-import hertta_client_lib as lib
+from . import hertta_client_lib as lib
 
 URL = "http://127.0.0.1:3030/graphql"
 client, ds = lib.client_and_dsl(URL)

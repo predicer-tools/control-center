@@ -4,8 +4,8 @@ import time
 import datetime
 import tomllib
 import pathlib
-from connectivity_api import post_request
-from config import (
+from .connectivity_api import post_request
+from .config import (
     TOKENFILE, URLS, BUCKETS, MEASUREMENTS,
     TAGS, FIELDS, TIME, PRECISION, FIELD_TYPES, LIMIT_AND_PAGES, PROCESSING_TIME,
     ORG, INFLUXDB_URL

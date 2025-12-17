@@ -11,15 +11,16 @@ from influxdb_client import InfluxDBClient
 from influxdb_client.rest import ApiException
 from gql import dsl
 from gql.transport.exceptions import TransportConnectionFailed
-import hertta_client_lib as lib
+from . import hertta_client_lib as lib
 import requests
-from ui.mainwindow import Ui_MainWindow
-from config import BUCKETS, MEASUREMENTS_BY_BUCKETS, LIMIT_AND_PAGES, PROCESSING_TIME, ORG, INFLUXDB_URL
-from fetch_thread import FetchThread, FetchPagination, FetchHerttaLocation
-from hertta_server_manager import HerttaServerManager
-from hertta_poller import HerttaJobPoller
-import hertta_client_manager
-from main_loop import MainLoop
+from .ui.mainwindow import Ui_MainWindow
+from .config import BUCKETS, MEASUREMENTS_BY_BUCKETS, LIMIT_AND_PAGES, PROCESSING_TIME, ORG, INFLUXDB_URL
+from .fetch_thread import FetchThread, FetchPagination, FetchHerttaLocation
+from .hertta_server_manager import HerttaServerManager
+from .hertta_poller import HerttaJobPoller
+from . import hertta_client_manager as hertta_client_manager
+from . import hertta_client_manager_new as hertta_client_manager_new
+from .main_loop import MainLoop
 
 
 @unique
@@ -541,7 +542,7 @@ class ControlCenter(QMainWindow):
         if not self._test_connection_to_hertta():
             self.hertta_client_msg.emit(f"[ConnectionError] Hertta Server did not respond at {hertta_client_manager.URL}")
             return
-        client, ds, job_id = hertta_client_manager.run_building_optimization()
+        client, ds, job_id = hertta_client_manager.start_optimization()
         t = self._hertta_jobs[job_id] = HerttaJobPoller(self.hertta_job_msg, self.hertta_job_status_signal, client, ds, job_id, self.hertta_job_finished_signal)
         t.start()
 

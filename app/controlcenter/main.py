@@ -4,8 +4,8 @@ import os
 import pathlib
 import tomllib
 from PySide6.QtWidgets import QApplication
-from controlcenter import ControlCenter
-from config import TOKENFILE
+from .controlcenter import ControlCenter
+from .config import TOKENFILE
 
 
 def main():
