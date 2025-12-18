@@ -29,6 +29,10 @@ Data Portal.
 
     pip install -e .
 
+    or
+
+    python -m pip install -e .
+
 
 * Get access token from https://portal.centerdenmark.com/en-US/
 * Create an InfluxDb token
@@ -49,4 +53,4 @@ influxdb_token = "paste influxdb token here inside the quotes"
 * Start the app from command prompt
 
 
-    python main.py
+    python -m controlcenter.main

@@ -297,7 +297,7 @@
                  <item>
                   <widget class="QToolButton" name="toolButton_run_building_optimization">
                    <property name="text">
-                    <string>Building opt.</string>
+                    <string>Start Hertta</string>
                    </property>
                    <property name="icon">
                     <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>

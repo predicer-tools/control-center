@@ -108,7 +108,7 @@ class ControlCenter(QMainWindow):
         self.ui.toolButton_stop_heat_consumption.clicked.connect(self.stop_heat)
         self.ui.toolButton_delete_data_from_influxdb.clicked.connect(self.delete_measurements)
         self.ui.toolButton_start_hertta_server.clicked.connect(self.start_hertta_server)
-        self.ui.toolButton_run_building_optimization.clicked.connect(self.run_building_optimization)
+        self.ui.toolButton_run_building_optimization.clicked.connect(self.run_building_optimization) #HERE IS THE LINE THAT IS CONNECTED TO RUN_BUILDING_OPTIMIZATION
         self.ui.toolButton_query_hertta_settings.clicked.connect(self.query_hertta_settings)
         self.ui.toolButton_update_hertta_settings.clicked.connect(self.update_hertta_settings)
         self.ui.toolButton_open_hertta_settings_file.clicked.connect(self._open_hertta_settings)
@@ -540,14 +540,20 @@ class ControlCenter(QMainWindow):
     @Slot(bool)
     def run_building_optimization(self):
         if not self._test_connection_to_hertta():
-            self.hertta_client_msg.emit(f"[ConnectionError] Hertta Server did not respond at {hertta_client_manager.URL}")
+            self.hertta_client_msg.emit(f"[ConnectionError] Hertta Server did not respond at {hertta_client_manager_new.URL}")
             return
-        client, ds, job_id = hertta_client_manager.start_optimization()
+        print("optimization started")
+        self.hertta_client_msg.emit("optimization started")
+
+        client, ds, job_id = hertta_client_manager_new.start_optimization()
+        print(f"job_id={job_id}")
+        self.hertta_client_msg.emit(f"job_id={job_id}")
         t = self._hertta_jobs[job_id] = HerttaJobPoller(self.hertta_job_msg, self.hertta_job_status_signal, client, ds, job_id, self.hertta_job_finished_signal)
         t.start()
 
     @Slot(str, int)
     def set_hertta_job_status(self, status, job_id):
+        print(f"[{job_id}] status={status}")
         if status == "QUEUED":
             self.hertta_job_msg.emit(f"Job is queued", job_id)
         elif status == "IN_PROGRESS":
@@ -564,6 +570,8 @@ class ControlCenter(QMainWindow):
 
     @Slot(dict, int)
     def handle_hertta_job_output(self, outcome, job_id):
+        print(f"[{job_id}] outcome:")
+        print(outcome)
         if outcome is not None:
             self.hertta_job_msg.emit(str(outcome), job_id)
         t = self._hertta_jobs.pop(job_id)

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.3
+## Created by: Qt User Interface Compiler version 6.9.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -727,7 +727,7 @@ class Ui_MainWindow(object):
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"location[place]", None))
         self.toolButton_update_hertta_settings.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"Hertta Client", None))
-        self.toolButton_run_building_optimization.setText(QCoreApplication.translate("MainWindow", u"Building opt.", None))
+        self.toolButton_run_building_optimization.setText(QCoreApplication.translate("MainWindow", u"Start Hertta", None))
         self.toolButton_run_weather_forecast.setText(QCoreApplication.translate("MainWindow", u"Weather forec.", None))
         self.toolButton_run_electricity_prices.setText(QCoreApplication.translate("MainWindow", u"Electr. prices", None))
         self.groupBox_10.setTitle(QCoreApplication.translate("MainWindow", u"Tasks", None))
