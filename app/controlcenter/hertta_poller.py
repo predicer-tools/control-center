@@ -3,6 +3,7 @@
 import threading
 from . import hertta_client_lib as lib
 from time import sleep
+from gql.transport.exceptions import TransportQueryError
 
 
 class HerttaJobPoller(threading.Thread):
@@ -16,17 +17,34 @@ class HerttaJobPoller(threading.Thread):
         self._job_id = job_id
         self._finished_signal = finished_signal
 
-    def run(self):
-        current_state = "NA"
-        while self.keep_going:
-            new_state, message = lib.get_job_status(self._client, self._ds, self._job_id)
-            if new_state != current_state:
-                self._status_signal.emit(new_state, self._job_id)
-                if new_state == lib.JobState.FAILED.value or new_state == lib.JobState.FINISHED.value:
-                    break
-                current_state = new_state
-            if message is not None:
-                self._logger_signal.emit(f"Job message: {message}", self._job_id)
-            sleep(2.0)
-        output = lib.job_outcome(self._client, self._ds, self._job_id)
-        self._finished_signal.emit(output, self._job_id)
+def run(self):
+    current_state = "NA"
+    while self.keep_going:
+        new_state, msg = lib.get_job_status(self._client, self._ds, self._job_id)
+
+        if new_state != current_state:
+            self._status_signal.emit(new_state, self._job_id)
+            current_state = new_state
+            if new_state in (lib.JobState.FAILED.value, lib.JobState.FINISHED.value):
+                break
+
+        if msg:
+            self._logger_signal.emit(f"Job message: {msg}", self._job_id)
+        sleep(2.0)
+
+    final_state, final_msg = lib.get_job_status(self._client, self._ds, self._job_id)
+    if final_state == lib.JobState.FAILED.value and final_msg:
+        self._logger_signal.emit(f"Job failed: {final_msg}", self._job_id)
+
+    if final_state == lib.JobState.FINISHED.value:
+        try:
+            output = lib.job_outcome(self._client, self._ds, self._job_id)
+        except TransportQueryError as e:
+            self._logger_signal.emit(f"GraphQL error fetching jobOutcome: {e}", self._job_id)
+            output = {}
+    else:
+        output = {}
+
+    self._finished_signal.emit(output, self._job_id)
+
+

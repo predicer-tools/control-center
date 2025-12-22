@@ -24,6 +24,11 @@ class HerttaServerManager:
             self.log_signal.emit(f"Hertta Server path {self._workdir} not found")
             return False
         cf = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0  # Don't show console when frozen
+        
+        env = os.environ.copy()
+        # Adjust level as you like: "error", "info", "debug", "trace"
+        env.setdefault("RUST_LOG", "debug")
+        
         try:
             self._process = subprocess.Popen(
                 self._command,
@@ -31,6 +36,9 @@ class HerttaServerManager:
                 stderr=subprocess.PIPE,
                 cwd=self._workdir,
                 creationflags=cf,
+                env=env,
+                text=True,
+                bufsize=1,
             )
         except OSError as e:
             self.log_signal.emit(f"[OSError] Hertta Server failed to start: {e}")
@@ -55,16 +63,14 @@ class HerttaServerManager:
             self._process.terminate()
 
     def _log_stdout(self, stdout):
-        for line in iter(stdout.readline, b""):
-            line = line.decode("UTF8", "replace").strip()
-            self.log_signal.emit(line)
-        stdout.close()
+        for line in stdout:
+            if line.strip():
+                self.log_signal.emit(f"[HERTTA STDOUT] {line.strip()}")
 
     def _log_stderr(self, stderr):
-        for line in iter(stderr.readline, b""):
-            line = line.decode("UTF8", "replace").strip()
-            self.log_signal.emit(line)
-        stderr.close()
+        for line in stderr:
+            if line.strip():
+                self.log_signal.emit(f"[HERTTA STDERR] {line.strip()}")
 
     def _wait_until_ready(self, timeout_s: float = 600.0, poll_interval_s: float = 2.0):
         """

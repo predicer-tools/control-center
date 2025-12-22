@@ -19,7 +19,6 @@ from .fetch_thread import FetchThread, FetchPagination, FetchHerttaLocation
 from .hertta_server_manager import HerttaServerManager
 from .hertta_poller import HerttaJobPoller
 from . import hertta_client_manager as hertta_client_manager
-from . import hertta_client_manager_new as hertta_client_manager_new
 from .main_loop import MainLoop
 
 
@@ -538,18 +537,30 @@ class ControlCenter(QMainWindow):
         return True
 
     @Slot(bool)
-    def run_building_optimization(self):
+    def run_building_optimization(self, _=False):
         if not self._test_connection_to_hertta():
-            self.hertta_client_msg.emit(f"[ConnectionError] Hertta Server did not respond at {hertta_client_manager_new.URL}")
+            self.hertta_client_msg.emit(
+                f"[ConnectionError] Hertta Server did not respond at {hertta_client_manager.URL}"
+            )
             return
-        print("optimization started")
-        self.hertta_client_msg.emit("optimization started")
 
-        client, ds, job_id = hertta_client_manager_new.start_optimization()
-        print(f"job_id={job_id}")
-        self.hertta_client_msg.emit(f"job_id={job_id}")
-        t = self._hertta_jobs[job_id] = HerttaJobPoller(self.hertta_job_msg, self.hertta_job_status_signal, client, ds, job_id, self.hertta_job_finished_signal)
-        t.start()
+        try:
+            self.hertta_client_msg.emit("Updating Hertta location to Finland / Tampere...")
+            print("Updating Hertta location to Finland / Tampere...")
+            ok, data = hertta_client_manager.set_location("Finland", "Tampere")
+        except Exception as e:
+            msg = f"[GraphQL error in updateSettings] {e}"
+            print(msg)
+            self.hertta_client_msg.emit(msg)
+            return
+
+        if not ok:
+            self.hertta_client_msg.emit(f"[updateSettings ValidationErrors] {data}")
+            print("[updateSettings ValidationErrors]", data)
+        else:
+            self.hertta_client_msg.emit(f"[updateSettings] New location: {data}")
+            print("[updateSettings] New location:", data)
+
 
     @Slot(str, int)
     def set_hertta_job_status(self, status, job_id):
