@@ -1,6 +1,6 @@
-site_name: Elexia Control Center
+site_name: Predicer Control Center
 site_url: https://github.com/predicer-tools/control-center/
-site_description: Overview of Elexia Control Center
+site_description: Overview of Predicer Control Center
 site_author: VTT
 
 repo_name: control-center
@@ -12,7 +12,7 @@ copyright: Copyright &copy; 2025 - 2026 VTT - Connectivity
 
 theme:
   name: material
-  logo: images/buildingicon.png
+  logo: images/docs_logo.png
 nav:
   - Home: index.md
 

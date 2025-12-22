@@ -1,9 +1,11 @@
-# Elexia Control Center
+# Predicer Control Center
 
 [![Python](https://img.shields.io/badge/python-3.11%20|%203.12%20|%203.13-blue.svg)](https://www.python.org/downloads/release/python-379/)
 
 A desktop application for managing connections between Hertta, Predicer, InfluxDb, and Center Denmark's 
 Data Portal.
+
+Documentation available at https://predicer-tools.github.io/control-center/.
 
 ## Prerequisites
 - Python 3.11+
