@@ -15,7 +15,6 @@ theme:
   logo: images/buildingicon.png
 nav:
   - Home: index.md
-  - Overview: overview.md
 
 plugins:
   - plotly
