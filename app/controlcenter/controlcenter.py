@@ -557,9 +557,26 @@ class ControlCenter(QMainWindow):
         if not ok:
             self.hertta_client_msg.emit(f"[updateSettings ValidationErrors] {data}")
             print("[updateSettings ValidationErrors]", data)
+            return
         else:
             self.hertta_client_msg.emit(f"[updateSettings] New location: {data}")
             print("[updateSettings] New location:", data)
+
+        try:
+            self.hertta_client_msg.emit("Starting optimization...")
+            print("Starting optimization...")
+            job_id, outcome = hertta_client_manager.start_optimization()
+        except Exception as e:
+            msg = f"[GraphQL error in startOptimization] {e}"
+            print(msg)
+            self.hertta_client_msg.emit(msg)
+            return
+
+        self.hertta_client_msg.emit(f"[startOptimization] job_id={job_id}")
+        print(f"[startOptimization] job_id={job_id}")
+
+        self.hertta_client_msg.emit(f"[jobOutcome] {outcome}")
+        print(f"[jobOutcome] {outcome}")
 
 
     @Slot(str, int)
