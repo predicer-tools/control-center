@@ -10,7 +10,7 @@ from PySide6.QtGui import QStandardItemModel, QStandardItem, QPixmap, QIcon, QCo
 from influxdb_client import InfluxDBClient
 from influxdb_client.rest import ApiException
 from gql import dsl
-from gql.transport.exceptions import TransportConnectionFailed
+from gql.transport.exceptions import TransportError
 import hertta_client_lib as lib
 import requests
 from ui.mainwindow import Ui_MainWindow
@@ -530,7 +530,7 @@ class ControlCenter(QMainWindow):
         operation = dsl.dsl_gql(dsl_query)
         try:
             client.execute(operation)
-        except (TransportConnectionFailed, requests.exceptions.ConnectionError) as e:
+        except (TransportError, requests.exceptions.ConnectionError) as e:
             self.set_hertta_disconnected()
             return False
         self.set_hertta_connected()
