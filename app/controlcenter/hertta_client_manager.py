@@ -54,6 +54,51 @@ def load_model_from_file(file_path: Optional[str] = None) -> Tuple[bool, Optiona
 
     return False, payload.get("message")
 
+def update_time_line(
+    step_hours: int, duration_hours: int
+) -> Tuple[bool, Optional[list]]:
+    """
+    Update the model’s timeline; omit fields with zero values.
+    Returns (True, None) on success or (False, validation_errors) on failure.
+    """
+    time_line_input = {}
+    # Only include step if any component is > 0
+    if step_hours > 0:
+        time_line_input["step"] = {"hours": step_hours, "minutes": 0, "seconds": 0}
+    # Only include duration if any component is > 0
+    if duration_hours > 0:
+        time_line_input["duration"] = {"hours": duration_hours, "minutes": 0, "seconds": 0}
+    # If nothing to update, return success immediately
+    if not time_line_input:
+        return True, None
+
+    errors_fragment = dsl.DSLFragment("TimeLineValidationErrors")
+    errors_fragment.on(ds.ValidationErrors)
+    errors_fragment.select(
+        ds.ValidationErrors.errors.select(ds.ValidationError.field, ds.ValidationError.message)
+    )
+    field = ds.Mutation.updateTimeLine.args(timeLineInput=time_line_input).select(errors_fragment)
+    result = client.execute(dsl.dsl_gql(dsl.DSLMutation(field), errors_fragment))
+    payload = result["updateTimeLine"]
+    return (True, None) if not payload.get("errors") else (False, payload["errors"])
+
+def save_model() -> Tuple[bool, Optional[str]]:
+    """
+    Persist the current model to disk using the saveModel mutation.
+    Returns (True, None) on success or (False, error message) on failure.
+    """
+    mutation_field = ds.Mutation.saveModel.select(ds.MaybeError.message)
+
+    try:
+        result = client.execute(dsl.dsl_gql(dsl.DSLMutation(mutation_field)))
+    except Exception as e:
+        return False, str(e)
+
+    payload = result.get("saveModel", {})
+    if payload.get("message") is None:
+        return True, None
+    return False, payload.get("message")
+
 def set_location(country: str, place: str) -> tuple[bool, Optional[list]]:
 
     settings_fragment = dsl.DSLFragment("SettingsResultAsSettings")

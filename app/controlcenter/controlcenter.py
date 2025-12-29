@@ -498,13 +498,44 @@ class ControlCenter(QMainWindow):
 
     @Slot(bool)
     def update_hertta_settings(self, _=False):
-        """Gets current time_line and location settings and writes them to Hertta Server settings."""
-        time_line_step = self.ui.spinBox_time_line_step.value()
-        time_line_duration = self.ui.spinBox_time_line_duration.value()
-        location_country = self.ui.lineEdit_location_country.text().strip()
-        location_place = self.ui.lineEdit_location_place.text().strip()
-        print(f"step:{time_line_step} duration:{time_line_duration} country:{location_country} place:{location_place}")
-        # self.hertta_settings = dict()
+        """Update model timeline and location on the Hertta server."""
+        if not self._test_connection_to_hertta():
+            self.hertta_client_msg.emit(
+                f"[ConnectionError] Hertta Server did not respond at {hertta_client_manager.URL}"
+            )
+            return
+
+        step_hours = self.ui.spinBox_time_line_step.value()
+        duration_hours = self.ui.spinBox_time_line_duration.value()
+        country = self.ui.lineEdit_location_country.text().strip()
+        place = self.ui.lineEdit_location_place.text().strip()
+
+        change_made = False
+
+        # Update timeline if needed
+        ok, errors = hertta_client_manager.update_time_line(step_hours, duration_hours)
+        if not ok:
+            self.hertta_client_msg.emit(f"[updateTimeLine ValidationErrors] {errors}")
+        elif step_hours > 0 or duration_hours > 0:
+            change_made = True
+            self.hertta_client_msg.emit("[updateTimeLine] Timeline updated successfully.")
+
+        # Update location if needed
+        if country or place:
+            ok, result = hertta_client_manager.set_location(country, place)
+            if not ok:
+                self.hertta_client_msg.emit(f"[updateSettings ValidationErrors] {result}")
+            else:
+                change_made = True
+                self.hertta_client_msg.emit(f"[updateSettings] New location: {result}")
+
+        # Persist the model if anything changed
+        if change_made:
+            ok_save, err_save = hertta_client_manager.save_model()
+            if ok_save:
+                self.hertta_client_msg.emit("[saveModel] Model saved successfully.")
+            else:
+                self.hertta_client_msg.emit(f"[saveModel] Failed: {err_save}")
 
     @Slot(bool)
     def _open_hertta_settings(self, _=False):
