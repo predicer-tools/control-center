@@ -35,7 +35,7 @@ class MarketType(Enum):
 @unique
 class Conversion(Enum):
     UNIT = auto()
-    TRANSPORT = auto()
+    TRANSFER = auto()
     MARKET = auto()
 
 

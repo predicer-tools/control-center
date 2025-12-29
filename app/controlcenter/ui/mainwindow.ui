@@ -334,6 +334,19 @@
                   </widget>
                  </item>
                  <item>
+                  <widget class="QToolButton" name="toolButton_load_model">
+                   <property name="text">
+                    <string>Load model</string>
+                   </property>
+                   <property name="icon">
+                    <iconset theme="QIcon::ThemeIcon::MediaPlaybackStart"/>
+                   </property>
+                   <property name="toolButtonStyle">
+                    <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <spacer name="verticalSpacer">
                    <property name="orientation">
                     <enum>Qt::Orientation::Vertical</enum>

@@ -4,6 +4,9 @@ from gql import dsl
 from gql.dsl import DSLField
 from . import hertta_client_lib as lib
 from gql.transport.exceptions import TransportQueryError
+import pathlib
+from importlib import resources
+import json
 
 URL = "http://127.0.0.1:3030/graphql"
 client, ds = lib.client_and_dsl(URL)
@@ -17,6 +20,39 @@ def connect_market_prices_to_forecast(market_name: str) -> DSLField:
             marketName=market_name, forecastName="whatever"
         ),
     )
+
+@lib.mutation
+def load_model_json(model_json: str) -> dsl.DSLField:
+    """Internal helper used by load_model_from_file; selects the MaybeError.message."""
+    return lib.select_maybe_error(
+        ds, ds.Mutation.loadModelJson.args(modelJson=model_json)
+    )
+
+def load_model_from_file(file_path: Optional[str] = None) -> Tuple[bool, Optional[str]]:
+    if file_path is None:
+        try:
+            model_json = resources.read_text(__package__, "elexia_model.json")
+        except (FileNotFoundError, ModuleNotFoundError) as e:
+            return False, f"resource not found: {e}"
+    else:
+        with open(file_path, "r", encoding="utf-8") as f:
+            model_json = f.read()
+
+    mutation_field = ds.Mutation.loadModelJson.args(modelJson=model_json).select(
+        ds.MaybeError.message
+    )
+
+    try:
+        result = client.execute(dsl.dsl_gql(dsl.DSLMutation(mutation_field)))
+    except Exception as e:
+        return False, str(e)
+
+    payload = result.get("loadModelJson", {})
+
+    if payload.get("message") is None:
+        return True, None
+
+    return False, payload.get("message")
 
 def set_location(country: str, place: str) -> tuple[bool, Optional[list]]:
 

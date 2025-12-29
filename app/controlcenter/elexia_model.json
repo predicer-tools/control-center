@@ -1,0 +1,1004 @@
+{
+  "time_line": {
+    "duration": {
+      "hours": 22,
+      "minutes": 0,
+      "seconds": 0
+    },
+    "step": {
+      "hours": 1,
+      "minutes": 0,
+      "seconds": 0
+    },
+    "start": {
+      "CustomStartTime": {
+        "start_time": "2023-01-01T01:00:00Z"
+      }
+    }
+  },
+  "input_data": {
+    "scenarios": [
+      {
+        "name": "s1",
+        "weight": 1.0
+      }
+    ],
+    "setup": {
+      "use_reserve_realisation": false,
+      "use_market_bids": true,
+      "use_reserves": false,
+      "common_timesteps": 0,
+      "common_scenario_name": "",
+      "use_node_dummy_variables": true,
+      "use_ramp_dummy_variables": true,
+      "node_dummy_variable_cost": 10000.0,
+      "ramp_dummy_variable_cost": 10000.0
+    },
+    "processes": [
+      {
+        "name": "solar_collector",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": true,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 1.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "solar_collector",
+            "sink": "dh_htf",
+            "capacity": 1.4,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [
+          {
+            "scenario": null,
+            "value": {
+              "Constant": {
+                "value": 0.0
+              }
+            }
+          }
+        ],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "malervej_boiler1",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 0.8,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "fuel_ng",
+            "sink": "malervej_boiler1",
+            "capacity": 18.75,
+            "vom_cost": 556.5181732678991,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "malervej_boiler1",
+            "sink": "dh_htf",
+            "capacity": 15.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "malervej_boiler2",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 0.8,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "fuel_ng",
+            "sink": "malervej_boiler2",
+            "capacity": 18.75,
+            "vom_cost": 556.5181732678991,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "malervej_boiler2",
+            "sink": "dh_htf",
+            "capacity": 15.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "helges_hoj_boiler",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 0.8,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "fuel_oil",
+            "sink": "helges_hoj_boiler",
+            "capacity": 18.75,
+            "vom_cost": 601.0809612252569,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "helges_hoj_boiler",
+            "sink": "dh_htf",
+            "capacity": 15.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "molleholmen_boiler1",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 0.8,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "fuel_oil",
+            "sink": "molleholmen_boiler1",
+            "capacity": 10.0,
+            "vom_cost": 601.0809612252569,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "molleholmen_boiler1",
+            "sink": "dh_htf",
+            "capacity": 8.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "molleholmen_boiler2",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 0.8,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "fuel_oil",
+            "sink": "molleholmen_boiler2",
+            "capacity": 10.0,
+            "vom_cost": 601.0809612252569,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "molleholmen_boiler2",
+            "sink": "dh_htf",
+            "capacity": 8.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_rock",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_rock",
+            "capacity": 0.2666666666666666,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_rock",
+            "sink": "dh_htf",
+            "capacity": 0.8,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_EVC",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_EVC",
+            "capacity": 0.4666666666666666,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_EVC",
+            "sink": "dh_htf",
+            "capacity": 1.4,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_City2",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_City2",
+            "capacity": 0.4333333333333333,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_City2",
+            "sink": "dh_htf",
+            "capacity": 1.3,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_Nordea",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_Nordea",
+            "capacity": 0.5,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_Nordea",
+            "sink": "dh_htf",
+            "capacity": 1.5,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_Mohov",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_Mohov",
+            "capacity": 0.5,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_Mohov",
+            "sink": "dh_htf",
+            "capacity": 1.5,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_globalconnect1",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_globalconnect1",
+            "capacity": 0.6666666666666666,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_globalconnect1",
+            "sink": "dh_htf",
+            "capacity": 2.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_globalconnect2",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_globalconnect2",
+            "capacity": 0.6666666666666666,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_globalconnect2",
+            "sink": "dh_htf",
+            "capacity": 2.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_EVC2",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_EVC2",
+            "capacity": 0.6666666666666666,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_EVC2",
+            "sink": "dh_htf",
+            "capacity": 2.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "HP_copenhagen_markets",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 3.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "elc",
+            "sink": "HP_copenhagen_markets",
+            "capacity": 1.0666666666666669,
+            "vom_cost": 129.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "HP_copenhagen_markets",
+            "sink": "dh_htf",
+            "capacity": 3.2,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "pit_sto_charge",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 1.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "veks_grid",
+            "sink": "pit_sto_charge",
+            "capacity": 1.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "pit_sto_charge",
+            "sink": "pit_heat_sto",
+            "capacity": 1.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      },
+      {
+        "name": "pit_sto_discharge",
+        "groups": [],
+        "conversion": "Unit",
+        "is_cf": false,
+        "is_cf_fix": false,
+        "is_online": false,
+        "is_res": false,
+        "eff": 1.0,
+        "load_min": 0.0,
+        "load_max": 1.0,
+        "start_cost": 0.0,
+        "min_online": 0.0,
+        "min_offline": 0.0,
+        "max_online": 0.0,
+        "max_offline": 0.0,
+        "initial_state": false,
+        "is_scenario_independent": false,
+        "topos": [
+          {
+            "source": "pit_heat_sto",
+            "sink": "pit_sto_discharge",
+            "capacity": 1.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          },
+          {
+            "source": "pit_sto_discharge",
+            "sink": "dh_htf",
+            "capacity": 1.0,
+            "vom_cost": 0.0,
+            "ramp_up": 1.0,
+            "ramp_down": 1.0,
+            "initial_load": 0.7,
+            "initial_flow": 0.7,
+            "cap_ts": []
+          }
+        ],
+        "cf": [],
+        "eff_ts": [],
+        "eff_ops_fun": []
+      }
+    ],
+    "nodes": [
+      {
+        "name": "fuel_oil",
+        "groups": [],
+        "is_commodity": true,
+        "is_market": false,
+        "is_res": false,
+        "state": null,
+        "cost": [
+          {
+            "scenario": null,
+            "value": {
+              "Constant": {
+                "value": 170.70604466410953
+              }
+            }
+          }
+        ],
+        "inflow": []
+      },
+      {
+        "name": "fuel_ng",
+        "groups": [],
+        "is_commodity": true,
+        "is_market": false,
+        "is_res": false,
+        "state": null,
+        "cost": [
+          {
+            "scenario": null,
+            "value": {
+              "Constant": {
+                "value": 53.02752
+              }
+            }
+          }
+        ],
+        "inflow": []
+      },
+      {
+        "name": "elc",
+        "groups": [],
+        "is_commodity": false,
+        "is_market": false,
+        "is_res": false,
+        "state": null,
+        "cost": [],
+        "inflow": []
+      },
+      {
+        "name": "veks_grid",
+        "groups": [],
+        "is_commodity": true,
+        "is_market": false,
+        "is_res": false,
+        "state": null,
+        "cost": [
+          {
+            "scenario": null,
+            "value": {
+              "Constant": {
+                "value": 107.46
+              }
+            }
+          }
+        ],
+        "inflow": []
+      },
+      {
+        "name": "dh_htf",
+        "groups": [],
+        "is_commodity": false,
+        "is_market": false,
+        "is_res": false,
+        "state": null,
+        "cost": [],
+        "inflow": [
+          {
+            "scenario": null,
+            "value": {
+              "FloatList": {
+                "values": [
+                  -42.778055555555554,
+                  -44.16694444444444,
+                  -42.2225,
+                  -41.38916666666667,
+                  -41.11138888888889,
+                  -43.61138888888888,
+                  -44.16694444444444,
+                  -44.16694444444444,
+                  -43.88916666666667,
+                  -45.278055555555554,
+                  -46.38916666666667,
+                  -46.94472222222223,
+                  -47.2225,
+                  -48.61138888888889,
+                  -49.44472222222223,
+                  -51.11138888888888,
+                  -51.66694444444444,
+                  -51.66694444444444,
+                  -53.61138888888888,
+                  -53.633333333333326,
+                  -52.251666666666665,
+                  -50.015,
+                  -50.74944444444444
+                ]
+              }
+            }
+          },
+          {
+            "scenario": "s1",
+            "value": {
+              "FloatList": {
+                "values": [
+                  -42.778055555555554,
+                  -44.16694444444444,
+                  -42.2225,
+                  -41.38916666666667,
+                  -41.11138888888889,
+                  -43.61138888888888,
+                  -44.16694444444444,
+                  -44.16694444444444,
+                  -43.88916666666667,
+                  -45.278055555555554,
+                  -46.38916666666667,
+                  -46.94472222222223,
+                  -47.2225,
+                  -48.61138888888889,
+                  -49.44472222222223,
+                  -51.11138888888888,
+                  -51.66694444444444,
+                  -51.66694444444444,
+                  -53.61138888888888,
+                  -53.633333333333326,
+                  -52.251666666666665,
+                  -50.015,
+                  -50.74944444444444
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "pit_heat_sto",
+        "groups": [],
+        "is_commodity": false,
+        "is_market": false,
+        "is_res": false,
+        "state": {
+          "in_max": 30.0,
+          "out_max": 30.0,
+          "state_loss_proportional": 0.00001,
+          "state_max": 3300.0,
+          "state_min": 0.0,
+          "initial_state": 800.0,
+          "is_scenario_independent": false,
+          "is_temp": false,
+          "t_e_conversion": 1.0,
+          "residual_value": 0.0
+        },
+        "cost": [],
+        "inflow": []
+      }
+    ],
+    "node_diffusion": [],
+    "node_delay": [],
+    "node_histories": [],
+    "markets": [],
+    "node_groups": [],
+    "process_groups": [],
+    "reserve_type": [],
+    "risk": [
+      {
+        "parameter": "alfa",
+        "value": 0.1
+      },
+      {
+        "parameter": "beta",
+        "value": 0.0
+      }
+    ],
+    "inflow_blocks": [],
+    "gen_constraints": []
+  }
+}

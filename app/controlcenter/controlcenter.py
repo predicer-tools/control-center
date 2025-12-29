@@ -107,7 +107,8 @@ class ControlCenter(QMainWindow):
         self.ui.toolButton_stop_heat_consumption.clicked.connect(self.stop_heat)
         self.ui.toolButton_delete_data_from_influxdb.clicked.connect(self.delete_measurements)
         self.ui.toolButton_start_hertta_server.clicked.connect(self.start_hertta_server)
-        self.ui.toolButton_run_building_optimization.clicked.connect(self.run_building_optimization) #HERE IS THE LINE THAT IS CONNECTED TO RUN_BUILDING_OPTIMIZATION
+        self.ui.toolButton_run_building_optimization.clicked.connect(self.run_building_optimization)
+        self.ui.toolButton_load_model.clicked.connect(self.run_load_model)
         self.ui.toolButton_query_hertta_settings.clicked.connect(self.query_hertta_settings)
         self.ui.toolButton_update_hertta_settings.clicked.connect(self.update_hertta_settings)
         self.ui.toolButton_open_hertta_settings_file.clicked.connect(self._open_hertta_settings)
@@ -535,6 +536,21 @@ class ControlCenter(QMainWindow):
             return False
         self.set_hertta_connected()
         return True
+    
+    @Slot(bool)
+    def run_load_model(self, _=False):
+        if not self._test_connection_to_hertta():
+            self.hertta_client_msg.emit(
+                f"[ConnectionError] Hertta Server did not respond at {hertta_client_manager.URL}"
+            )
+            return
+
+        self.hertta_client_msg.emit("[loadModelJson] Loading built‑in model…")
+        ok, message = hertta_client_manager.load_model_from_file()
+        if ok:
+            self.hertta_client_msg.emit("[loadModelJson] Model loaded successfully.")
+        else:
+            self.hertta_client_msg.emit(f"[loadModelJson] Failed: {message}")
 
     @Slot(bool)
     def run_building_optimization(self, _=False):

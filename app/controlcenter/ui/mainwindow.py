@@ -255,6 +255,13 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.toolButton_run_electricity_prices)
 
+        self.toolButton_load_model = QToolButton(self.groupBox_6)
+        self.toolButton_load_model.setObjectName(u"toolButton_load_model")
+        self.toolButton_load_model.setIcon(icon1)
+        self.toolButton_load_model.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
+
+        self.verticalLayout_8.addWidget(self.toolButton_load_model)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_8.addItem(self.verticalSpacer)
@@ -730,6 +737,7 @@ class Ui_MainWindow(object):
         self.toolButton_run_building_optimization.setText(QCoreApplication.translate("MainWindow", u"Start Hertta", None))
         self.toolButton_run_weather_forecast.setText(QCoreApplication.translate("MainWindow", u"Weather forec.", None))
         self.toolButton_run_electricity_prices.setText(QCoreApplication.translate("MainWindow", u"Electr. prices", None))
+        self.toolButton_load_model.setText(QCoreApplication.translate("MainWindow", u"Load model", None))
         self.groupBox_10.setTitle(QCoreApplication.translate("MainWindow", u"Tasks", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Fetch from Data Lake to InfluxDb", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Weather", None))
